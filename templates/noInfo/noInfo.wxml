@@ -1,0 +1,6 @@
+<template name="noInfo">
+  <view class='noInfo'>
+    <image mode='aspectFill' src='/imgs/source/default.png'></image>
+    <view>{{message}}</view>
+  </view>
+</template>
