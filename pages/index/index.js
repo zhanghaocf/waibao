@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 import httpUrl from '../../utils/http_util.js';
+import apiproxy from '../../utils/wxapiToPromise.js';
 Page({
   data: {
     motto: 'Hello World',
