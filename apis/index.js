@@ -1,7 +1,19 @@
 var Mock = require('../utils/mock.js');
+// res = Mock.mock({
+//   'success': true,
+//   'msg': '',
+//   'result': {
+//     'accountToken': 'dcbbd581feed460d9719bdb86540c4d7'
+//   }
+// })
 function ajax(url){
   var res='';
   switch(url){
+    case 'api/account/login':
+      res = Mock.mock({
+          'accountToken':'dcbbd581feed460d9719bdb86540c4d7'
+      })
+    break;
     case 'api/getBanner':
       res = Mock.mock({
         'success': true,
