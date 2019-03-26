@@ -17,6 +17,7 @@ Page({
     })
   },
   onLoad: function () {
+    app.navigatologin();
     httpUrl.Get('api/getBanner',false,this,app,false,true).then(res=>{
       console.log(res)
     })

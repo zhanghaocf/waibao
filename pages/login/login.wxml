@@ -1,0 +1,2 @@
+<!--pages/login/login.wxml-->
+<button class='btn'  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信一键登录 </button>

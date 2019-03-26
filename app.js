@@ -44,7 +44,7 @@ App({
   //获取token值
   getAccessToken: function(code){
     let isMock = this.globalData.isMock;
-    return httputil.Post(this.globalData.domainName + 'api/account/login',{
+    return httputil.Post(this.globalData.domainName + 'api/account/login',   {
       code:code
     },false,null,this,false,isMock);
   },
@@ -82,6 +82,11 @@ App({
     }
     ths.setData({
       isLoading: false
+    })
+  },
+  navigatologin: function(){
+    !this.globalData.userInfo && wx.navigateTo({
+      url: '/pages/login/login',
     })
   },
   globalData: {
