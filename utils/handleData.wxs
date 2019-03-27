@@ -1,0 +1,9 @@
+var percentFn = function (d) {
+  var max = 30000;
+  var middle = d / 30000;
+  var per = middle >=1 ?100:100*middle;
+  return per;
+}
+module.exports = {
+  percentFn: percentFn
+};

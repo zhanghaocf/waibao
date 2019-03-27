@@ -3,57 +3,96 @@
 const app = getApp()
 import httpUrl from '../../utils/http_util.js';
 import apiproxy from '../../utils/wxapiToPromise.js';
+const appdata = app.globalData;
+const isMock = appdata.isMock;
+const domainName = appdata.domainName;
+const token = appdata.token;
 Page({
   data: {
-    motto: 'Hello World',
+    isLoading: false,
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    circleSize:120,//circle进度环大小
+    bannerList:[],
+    classifyList:[],
+    achievement:{
+      walk:0,
+      kilo:0
+    },
+    recommendList:[]
   },
   onLoad: function () {
-    app.navigatologin();
-    httpUrl.Get('api/getBanner',false,this,app,false,true).then(res=>{
-      console.log(res)
+    //设置进度换大小
+    let circleSize=wx.getSystemInfoSync().windowWidth/750*312;
+    this.setData({
+      circleSize
     })
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
+    if (!app.globalData.userInfo) {
     } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+      app.unloginCallback = res => {
+        //console.log('没有登录')
+        app.navigatologin();
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
         }
       })
     }
+    if(!!token){
+      this.getData();
+    }else{
+      let ths=this;
+      app.beforeLoginCallback=function(){
+        ths.getData();
+      }
+    }
+    
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  getData:function(){
+    let arr = [this.getBannerHttp(), this.getClassify(), this.getAchievement(), this.getRecommend()];
+    httpUrl.PromiseAll(arr,this).then(res=>{
+      console.log(res);
+    }).catch(err=>{
+      app.errorHandle(err,app,this,this.getData);
+    })
+  },
+  getRecommend:function(){
+    return httpUrl.Get(domainName +'api/getRecommend',false,this,app,false,isMock).then(res=>{
+      //console.log(res);
+      this.setData({
+        recommendList:res.list
+      })
+      return res;
+    })
+  },
+  getAchievement:function(){
+    return httpUrl.Get(domainName +'api/getAchievement',false,this,app,true,isMock).then(res=>{
+      //console.log(res);
+      this.setData({
+        achievement:res
+      })
+      return res;
+    })
+  },
+  getClassify:function(){
+    return httpUrl.Get(domainName+'api/getClassify',false,this,app,false,isMock).then(res=>{
+      //console.log(res)
+      this.setData({
+        classifyList:res.list
+      })
+      return res;
+    })
+  },
+  getBannerHttp:function(){
+    return httpUrl.Get(domainName+'api/getBanner', false, this, app, false, isMock).then(res => {
+      //console.log(res)
+      this.setData({
+        bannerList:res.list
+      });
+      return res;
     })
   }
 })

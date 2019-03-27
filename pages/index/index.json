@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "zxLoading":"/components/component-zxLoading/component-zxLoading",
+    "circle":"/components/circle/index"
+  }
 }

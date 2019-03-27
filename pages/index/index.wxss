@@ -1,21 +1,141 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@import "../../templates/noInfo/noInfo.wxss";
+.search{
+  width:690rpx;
+  height:64rpx;
+  border-radius: 6rpx;
+  background-color: white;
+  line-height: 64rpx;
+  font-size: 26rpx;
+  color:#979797;
+  position: absolute;
+  top:20rpx;
+  z-index: 1;
+  left:50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  vertical-align: middle;
+  padding-left: 29rpx;
+  box-sizing: border-box;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+.bannerwrap{
+  height:357rpx;
+}
+.slide-image{
+  display: block;
+  width:100%;
+  height:100%;
+}
+.cwrap{
+  flex-wrap: wrap;
+  font-size: 24rpx;
+  color:#616161;
+  background-color: white;
+  align-content: space-around;
+  height:387rpx;
+}
+.bbgray{
+  border-bottom: 16rpx solid #f7f7f7;
+}
+.citem{
+  flex-basis: 25%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  text-align: center;
+}
+.cimg{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 13rpx;
+  display: block;
+  margin:0 auto 18rpx;
+}
+.ctitle{
+  width:100rpx;
+  margin:0 auto;
+}
+.datawrap{
+  height:530rpx;
+  position:relative;
+  overflow: hidden;
+  text-align: center;
+  padding-top: 35rpx;
+  box-sizing: border-box;
+}
+.databg{
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index: -1;
+  left:0;
+  top:0;
+  opacity: 0.6;
+}
+.rule{
+  font-size: 26rpx;
+  color:white;
+  float: right;
+  padding:10rpx;
+  position:absolute;
+  top:15rpx;
+  right:21rpx;
+}
+.cirwrap{
+  display: inline-block;
   border-radius: 50%;
+  border:4rpx solid #b7d9f2;
+  padding:15rpx;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.walk{
+  color:white;
+  font-size: 38rpx;
+  margin-bottom: 37rpx;
 }
-
-.usermotto {
-  margin-top: 200px;
+.kilo{
+  font-size: 25rpx;
+  color:white;
+}
+.copubtn{
+  font-size: 34rpx;
+  color:white;
+  height:76rpx;
+  line-height: 76rpx;
+  vertical-align: middle;
+  text-align: center;
+  width:304rpx;
+  border-radius: 38rpx;
+  border:2rpx solid #f9ffff;
+  margin:15rpx auto 0;
+}
+.rtitle{
+  font-size: 31rpx;
+  color:#353535;
+  height:81rpx;
+  line-height: 81rpx;
+  border-bottom: 1rpx solid #f6f6f6;
+  text-align: center;
+}
+.rwrap{
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding:18rpx 28rpx 0;
+  justify-content: space-between;
+}
+.shopitem{
+  flex-basis: 48%;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-size: 28rpx;
+  color:#333333;
+}
+.shopimg{
+  width:100%;
+  height:337rpx;
+}
+.shopname{
+  margin: 15rpx 0;
+}
+.shopmoney{
+  margin-bottom: 35rpx;
+  color:#ec3934;
 }

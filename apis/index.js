@@ -9,26 +9,65 @@ var Mock = require('../utils/mock.js');
 function ajax(url){
   var res='';
   switch(url){
+    /**
+     * post
+     * 不需要授权
+     * {code}
+     */
     case 'api/account/login':
       res = Mock.mock({
           'accountToken':'dcbbd581feed460d9719bdb86540c4d7'
       })
     break;
+    /**
+     * get
+     * 不需要授权
+     */
     case 'api/getBanner':
       res = Mock.mock({
-        'success': true,
-        'msg': '',
-        'result|10': [{
-          'id|+1': 1,
-          'img': "@image('200x100', '#4A7BF7','#fff','pic')",
-          'title': '@ctitle(3,8)',
-          'city': "@county(true)",
-          'stock_num': '@integer(0,100)',//库存数量  
-          'marketing_start': '@datetime()',
-          'marketing_stop': '@now()',
-          'price': '@integer(100,2000)',//现价，单位：分  
-          'original_price': '@integer(100,3000)'
+          'list|3': [{
+            'id|+1': 1,
+            'img': "https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg",
+          }]
+      })
+    break;
+    /**
+     * get
+     * 不需要授权
+     */
+    case 'api/getClassify':
+      res = Mock.mock({
+        'list|8':[{
+          'id|+1':1,
+          'name': '@ctitle(2,4)',
+          'img':'https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg'
         }]
+      })
+    break;
+    /**
+     * get
+     * 需要授权
+     */
+    case 'api/getAchievement':
+      res = Mock.mock({
+        'walk':'@integer(1000,20000)',
+        'kilo':'@integer(1,200)'
+      })
+    break;
+    /**
+     * get
+     * 不需要授权
+     */
+    case 'api/getRecommend':
+      res = Mock.mock({
+        'list|4':[
+          {
+            'id|+1':1,
+            'img':'https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg',
+            'name':'@ctitle(5,15)',
+            'money':'@float(100, 2000, 0, 2)'
+          }
+        ]
       })
     break;
   }

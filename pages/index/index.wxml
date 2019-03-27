@@ -1,13 +1,55 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+<wxs module="hd" src="../../utils/handleData.wxs" />
+<import src="../../templates/noInfo/noInfo.wxml" />
+<view class='search'>
+  <icon type='search' size='26rpx' color='#989898'></icon>
+  点击搜索商品
+</view>
+<swiper
+  class='bannerwrap'
+  wx:if="{{bannerList.length>0}}"
+  indicator-dots="{{true}}"
+  autoplay="{{true}}"
+  circular="{{true}}"
+>
+  <block wx:for="{{bannerList}}" wx:key="id">
+    <swiper-item>
+      <image src="{{item.img}}" class="slide-image" mode='aspectFill'/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class='flexwrap cwrap bbgray' wx:if="{{classifyList.length>0}}">
+  <block wx:for="{{classifyList}}" wx:key="id">
+    <view class='citem'>
+      <image src='{{item.img}}' class='cimg' mode='aspectFill'></image>
+      <view class='ctitle oneline'>{{item.name}}</view>
+    </view>
+  </block>
+</view>
+<view class='datawrap bbgray'>
+  <image src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1599565339,72243655&fm=26&gp=0.jpg' class='databg' mode="aspectFill"></image>
+  <text class='rule'>兑换规则</text>
+  <view class='cirwrap'>
+    <circle size="{{circleSize}}" percent="{{hd.percentFn(achievement.walk)}}">
+      <view class='walk oneline'>{{achievement.walk}} 步</view>
+      <view class='kilo oneline'>{{achievement.kilo}} Km</view>
+    </circle>
+  </view>
+  <view class='copubtn' hover-class='activeBtn' hover-stay-time="100">兑换优惠券</view>
+</view>
+<view class='recommend bbgray'>
+  <view class='rtitle'>商品推荐</view>
+  <block wx:if="{{recommendList.length===0}}">
+    <template is="noInfo" data="{{message:'推荐商品还在准备中哦，敬请期待'}}"></template>
+  </block>
+  <view class='rwrap flexwrap'>
+    <block wx:for="{{recommendList}}" wx:key="id">
+      <view class='shopitem'>
+        <image class='shopimg' src='{{item.img}}' mode="aspectFill"></image>
+        <view class='oneline shopname'>{{item.name}}</view>
+        <view class='oneline shopmoney'>￥{{item.money}}</view>
+      </view>
     </block>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
 </view>
+<zxLoading wx:if="{{isLoading}}" loadType="grid">快马加鞭中</zxLoading>

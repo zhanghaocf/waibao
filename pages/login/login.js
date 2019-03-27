@@ -1,4 +1,5 @@
 // pages/login/login.js
+const app = getApp();
 Page({
 
   /**
@@ -15,8 +16,11 @@ Page({
 
   },
   getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    
+    console.log(e);
+    let userInfo = e.detail.userInfo;
+    if (!!userInfo){
+      app.globalData.userInfo = e.detail.userInfo;
+      wx.navigateBack({});
+    }
   }
 })

@@ -10,12 +10,14 @@ App({
     that.doLogin();
     // 获取用户信息
     wxapi.proxy.getSetting().then(res=>{
-      console.log(res);
       if (res.authSetting['scope.userInfo']) {
         // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
         that.getUserInfo();
       }else{
-        console.log('未授权')
+        //console.log('未授权')
+        if (this.unloginCallback) {
+          this.unloginCallback()
+        }
       }
     })
   },
@@ -36,7 +38,11 @@ App({
     return wxapi.proxy.login().then(res => {
       return this.getAccessToken(res.code)
     }).then(res => {
-      wx.setStorageSync("token", res.accountToken);
+      this.globalData.token= res.accountToken;
+      //解决首页有需要用到token的提前在获取token之前就加载了
+      if (this.beforeLoginCallback) {
+        this.beforeLoginCallback();
+      }
     }).catch(err => {
       this.errorHandle(err, that);
     })
@@ -63,12 +69,12 @@ App({
     })
   },
   //异步出错运行的函数统一放在这里
-  errorHandle: function (reason,ths, callback) {
+  errorHandle: function (reason,app,page,callback) {
     reason = !!reason?reason:"页面出错";
     //以下方法处理服务器重启token值没有了的情况，而在不刷新小程序情况下会出错，因为有本地没有过期的token
     var restart = reason === '401.1 api session expiration';
     if (restart && !!callback) {
-      ths.doLogin().then((res) => {
+      app.doLogin().then((res) => {
         callback();
       });
       return;
@@ -77,10 +83,10 @@ App({
       title: reason,
       icon: 'none',
     })
-    if (!ths) {
+    if (!page) {
       return;
     }
-    ths.setData({
+    page.setData({
       isLoading: false
     })
   },
@@ -90,6 +96,7 @@ App({
     })
   },
   globalData: {
+    token:null,
     userInfo: null,
     isMock: true,
     domainName:''

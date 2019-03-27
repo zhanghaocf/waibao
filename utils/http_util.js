@@ -10,7 +10,7 @@
 import Promise from './promise.js'
 import Mock from '../apis/index.js'
 function Get(url, isLoading, page, app, needsAuth, isMock) {
- var token=wx.getStorageSync("token");
+  var token = app.globalData.token;
   if (isLoading) {
     page.setData({
       isLoading: true
@@ -31,8 +31,8 @@ function Get(url, isLoading, page, app, needsAuth, isMock) {
 /**
  * 封装post方法
  */
-function Post(url, data, isLoading, page, app, needsAuth, isMock) {
-  var token = wx.getStorageSync("token");
+function Post(url, data, isLoading, page,app, needsAuth, isMock) {
+  var token = app.globalData.token;
   if (isLoading) {
     page.setData({
       isLoading: true
@@ -51,7 +51,7 @@ function Post(url, data, isLoading, page, app, needsAuth, isMock) {
  * 封装delete方法
  */
 function Delete(url, isLoading, page, app, needsAuth, isMock){
-  var token = wx.getStorageSync("token");
+  var token = app.globalData.token;
   if (isLoading) {
     page.setData({
       isLoading: true
@@ -197,32 +197,16 @@ function postpromisenoauth(url, data) {
   })
 }
 //等到所有异步函数都执行完触发事件，arr数组都是promise对象
-function promiseAll(arr, callback, page,restartCallback) {
+function promiseAll(arr, page) {
   page.setData({
     isLoading: true
   });
-  Promise.all(arr).then((val) => {
+  return Promise.all(arr).then((val) => {
     page.setData({
       isLoading: false
     })
     return val;
-  }).catch((val) => {
-    var restart=!!(val ==='401.1 api session expiration');
-    if (restart && !!restartCallback){
-      //需要重新获取token
-      //以下方法处理服务器重启token值没有了的情况，而在不刷新小程序情况下会出错，因为有本地没有过期的token
-      restartCallback();
-      return;
-    }
-    page.setData({
-      isLoading: false
-    })
-    val=!!val?val:"发生错误";
-    wx.showToast({
-      title: val,
-      icon: 'none',
-    })
-  })
+  });
 }
 module.exports = {
   Get: Get,
