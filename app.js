@@ -7,7 +7,8 @@ App({
     //发布新版本时检测用户页面是否需要重启
     that.updateTest();
     // 登录
-    that.doLogin();
+    //TODO:需要还原到时
+    //that.doLogin();
     // 获取用户信息
     wxapi.proxy.getSetting().then(res=>{
       if (res.authSetting['scope.userInfo']) {
@@ -15,8 +16,8 @@ App({
         that.getUserInfo();
       }else{
         //console.log('未授权')
-        if (this.unloginCallback) {
-          this.unloginCallback()
+        if (that.unloginCallback) {
+          that.unloginCallback()
         }
       }
     })
@@ -96,6 +97,7 @@ App({
     })
   },
   globalData: {
+    address:null,
     token:null,
     userInfo: null,
     isMock: true,

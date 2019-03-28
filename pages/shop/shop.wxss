@@ -1,1 +1,14 @@
 /* pages/shop/shop.wxss */
+.search{
+  width:690rpx;
+  height:40px;
+  border-radius: 6rpx;
+  background-color: white;
+  line-height: 40px;
+  font-size: 16px;
+  color:#979797;
+  margin:10px auto;
+  padding-left: 29rpx;
+  box-sizing: border-box;
+  border:1rpx solid #bbbbbb;
+}

@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 import httpUrl from '../../utils/http_util.js';
 import apiproxy from '../../utils/wxapiToPromise.js';
 const appdata = app.globalData;
@@ -28,27 +28,28 @@ Page({
       circleSize
     })
     if (!app.globalData.userInfo) {
-    } else if (this.data.canIUse){
-      app.unloginCallback = res => {
-        //console.log('没有登录')
-        app.navigatologin();
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
+      if (this.data.canIUse){
+          app.unloginCallback = res => {
+            app.navigatologin();
+          }
+        } else {
+          // 在没有 open-type=getUserInfo 版本的兼容处理
+          wx.getUserInfo({
+            success: res => {
+              app.globalData.userInfo = res.userInfo
+            }
+          })
         }
-      })
     }
-    if(!!token){
+    //TODO:需要还原到时
+    // if(!!token){
       this.getData();
-    }else{
-      let ths=this;
-      app.beforeLoginCallback=function(){
-        ths.getData();
-      }
-    }
+    // }else{
+    //   let ths=this;
+    //   app.beforeLoginCallback=function(){
+    //     ths.getData();
+    //   }
+    // }
     
   },
   getData:function(){

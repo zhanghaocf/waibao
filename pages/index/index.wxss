@@ -88,11 +88,12 @@
 }
 .walk{
   color:white;
-  font-size: 38rpx;
+  font-size: 40rpx;
   margin-bottom: 37rpx;
+  font-weight: bold;
 }
 .kilo{
-  font-size: 25rpx;
+  font-size: 30rpx;
   color:white;
 }
 .copubtn{

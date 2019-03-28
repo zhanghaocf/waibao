@@ -1,2 +1,29 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<view class="header">
+  <block wx:if="{{!!userInfo}}">
+    <image class='headImg' src='{{userInfo.avatarUrl}}' mode='aspectFill'></image>
+    <view class='nickname'>{{userInfo.nickName}}</view>
+  </block>
+</view>
+<view class='flexwrap mymenu'>
+  <view class='menuitem'>
+    <image class='menuImg' src='https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg' mode="aspectFill"></image>
+    <view class='oneline menuname'>收货地址</view>
+  </view>
+  <view class='menuitem'>
+    <image class='menuImg' src='https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg' mode="aspectFill"></image>
+    <view class='oneline menuname'>优惠券</view>
+  </view>
+  <view class='menuitem'>
+    <image class='menuImg' src='https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg' mode="aspectFill"></image>
+    <view class='oneline menuname'>我的订单</view>
+  </view>
+  <view class='menuitem'>
+    <image class='menuImg' src='https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg' mode="aspectFill"></image>
+    <view class='oneline menuname'>运动步数</view>
+  </view>
+  <view class='menuitem'>
+    <image class='menuImg' src='https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg' mode="aspectFill"></image>
+    <view class='oneline menuname'>联系客服</view>
+  </view>
+</view>

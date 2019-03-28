@@ -1,0 +1,130 @@
+@import "../../templates/noInfo/noInfo.wxss";
+page {
+	background:#fafafa;
+}
+.view-tint{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200rpx;
+}
+.view-tint image{
+   width: 312rpx;
+   height: 312rpx;
+   /* margin-left: 100rpx; */
+}
+
+.view-tint text{
+   color: #888888;
+   font-size: 33rpx;
+   margin-top: 30rpx;
+}
+
+/*that means a record*/
+.item {
+	margin-bottom: 60rpx;
+	background: #fff;
+}
+/*姓名与手机号码*/
+.item .header {
+	font-size: 26rpx;
+	color: #999999;
+	display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+.item .summary {
+	color: #333333;
+	font-size: 30rpx;
+  margin-bottom: 32rpx;
+  word-break: break-all;
+}
+
+.item .footer {
+	border-top: 1px solid #ccc;
+	font-size: 28rpx;
+	color: #999;
+	padding-left: 10rpx;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+/*设为默认地址*/
+.set-default {
+	display: flex;
+	align-items: center;
+  height:80rpx;
+  line-height: 80rpx;
+}
+
+.dot{
+  width:30rpx;
+  height:30rpx;
+  box-sizing: border-box;
+  color:#cacaca;
+  border-radius: 50%;
+  border:1px solid currentColor;
+}
+
+.setDefaultActive .dot{
+  color:#ebb417;
+  background-color: currentColor;
+}
+
+.set-default text {
+	font-size: 28rpx;
+	margin-left: 6rpx;
+}
+
+.setDefaultActive text{
+	color:#ebb417;
+}
+
+/*编辑与删除操作*/
+.item .footer .operation {
+	display: flex;
+  display: -webkit-flex;
+}
+
+.item .footer .operation .container {
+	display: flex;
+	align-items: center;
+  margin-left: 35rpx;
+}
+
+.item .footer .operation .container image {
+	width: 30rpx;
+	height: 30rpx;
+}
+
+.item .footer .operation .container text {
+	margin-left: 6rpx;
+  color:#333333;
+	font-size: 28rpx;
+}
+
+/*地址列表包装容器*/
+.address-list {
+	margin-bottom: 156px;
+  padding:0 30rpx;
+}
+
+.newAddress{
+  background-color: rgba(221,169,22,0.8);
+  color:white;
+  font-size: 30rpx;
+  width:420rpx;
+  position:fixed;
+  bottom:50rpx;
+  left:50%;
+  margin-left: -210rpx;
+}
+.buttonHover{
+  background-color: rgba(221,169,22,1);
+}

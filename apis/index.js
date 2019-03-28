@@ -1,4 +1,19 @@
 var Mock = require('../utils/mock.js');
+var directory = Mock.mock({
+  'list|9': [
+    {
+      'id|+1': 1,
+      'type': '@ctitle(2,5)',
+      'children|4-15': [
+        {
+          'id|+1': 1,
+          'name': '@ctitle(3,10)',
+          'img': 'https://zhgroot.cn/educational_administration_system/Public/img/bg.jpg'
+        }
+      ]
+    }
+  ]
+});
 // res = Mock.mock({
 //   'success': true,
 //   'msg': '',
@@ -69,6 +84,13 @@ function ajax(url){
           }
         ]
       })
+    break;
+    /**
+     * get
+     * 不需要授权
+     */
+    case 'api/getDirectory':
+      res = directory;
     break;
   }
   return res;

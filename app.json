@@ -4,12 +4,12 @@
     "pages/shop/shop",
     "pages/me/me",
     "pages/login/login",
-    "pages/logs/logs"
+    "pages/address/address"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "微型商城 ",
     "navigationBarTextStyle":"black"
   },
   "tabBar":{

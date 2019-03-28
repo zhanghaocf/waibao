@@ -1,62 +1,39 @@
 // pages/shop/shop.js
+const app = getApp();
+import httpUrl from '../../utils/http_util.js';
+const appdata = app.globalData;
+const isMock = appdata.isMock;
+const domainName = appdata.domainName;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    wrapheight:0,//分类高度
+    list:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let wrapheight = wx.getSystemInfoSync().windowHeight-60;
+    this.setData({
+      wrapheight
+    });
+    this.getDirectory();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  getDirectory:function(){
+    httpUrl.Get(domainName +'api/getDirectory',true,this,app,false,isMock).then(res=>{
+      //console.log(res);
+      this.setData({
+        list:res.list
+      })
+    }).catch(err=>{
+      app.errorHandle(err, app, this, this.getDirectory);
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

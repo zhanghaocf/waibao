@@ -1,2 +1,11 @@
 <!--pages/shop/shop.wxml-->
-<text>pages/shop/shop.wxml</text>
+<view class='search'>
+  <icon type='search' size='26rpx' color='#989898'></icon>
+  点击搜索商品
+</view>
+<menuclassify wrapheight="{{wrapheight}}"
+              list="{{list}}"
+              activemenu2="{{0}}"
+              activemenu="{{-1}}"
+              bindhandlecontent>
+</menuclassify>

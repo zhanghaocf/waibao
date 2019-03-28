@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "地址管理",
+  "usingComponents": {
+    "zxLoading": "/components/component-zxLoading/component-zxLoading"
+  }
+}
